@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resources Culture="ru-RU">
+	<Group Type="String">
+		<Items>
+			<Item Name="Caption" Value="Сохраненный профиль пользователя" />
+			<Item Name="Columns.MspContact.Caption" Value="Контакт" />
+			<Item Name="Columns.MspCulture.Caption" Value="Культура" />
+			<Item Name="Columns.MspDynamic.Caption" Value="Динамическая настройка" />
+			<Item Name="Columns.MspKey.Caption" Value="Ключ" />
+			<Item Name="Columns.MspName.Caption" Value="Название" />
+			<Item Name="Columns.MspObjectData.Caption" Value="Данные" />
+			<Item Name="Columns.MspProfileData.Caption" Value="Расширенная настройка колонок" />
+			<Item Name="EventsProcessSchema.Caption" Value="Бизнес-процесс" />
+		</Items>
+	</Group>
+</Resources>

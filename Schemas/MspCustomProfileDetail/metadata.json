@@ -1,0 +1,7 @@
+= MetaData.Schema.UId "d8813379-1a05-4ef7-abde-1c70782d1091"
+= MetaData.Schema.A2 "MspCustomProfileDetail"
+= MetaData.Schema.A5 "479f70b4-9acf-4e9e-85c9-3a190e2b8f8d"
+= MetaData.Schema.B2.["8f7c31a4-b656-47c9-a503-a72d0b3dd077"].A4 "d8813379-1a05-4ef7-abde-1c70782d1091"
+= MetaData.Schema.HD5 []
+- MetaData.Schema.B7
++ MetaData.Schema.B7 false

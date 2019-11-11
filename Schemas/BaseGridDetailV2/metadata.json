@@ -1,0 +1,36 @@
+= MetaData.Schema.UId "7a5ca64c-9233-45d5-ad9d-7df75d904943"
+= MetaData.Schema.A5 "c20b2797-8f32-40a4-9b82-5c607b73716c"
++ MetaData.Schema.B2 {
+  "UId": "ed3a1e3f-e673-44bc-8f4e-51c21cd5656e",
+  "A2": "SetupProGridMenuCaption",
+  "A3": "7a5ca64c-9233-45d5-ad9d-7df75d904943",
+  "A4": "7a5ca64c-9233-45d5-ad9d-7df75d904943",
+  "A5": "c20b2797-8f32-40a4-9b82-5c607b73716c"
+}
++ MetaData.Schema.B2 {
+  "UId": "e7031dc3-4c2b-40aa-b8cd-3982d618902a",
+  "A2": "SwitchProGridMenuCaption",
+  "A3": "7a5ca64c-9233-45d5-ad9d-7df75d904943",
+  "A4": "7a5ca64c-9233-45d5-ad9d-7df75d904943",
+  "A5": "c20b2797-8f32-40a4-9b82-5c607b73716c"
+}
+~ MetaData.Schema.B2 ["0cd12b86-9530-4232-82f8-2b7f7565acd0","9d45150e-4614-4ebc-bd6a-72c206c111e9","ef1db1c5-cce1-483f-8d8b-83c53609dab3","8b8a588f-08ba-4809-a7c4-462e77a4e244","64f1471a-9b9f-437e-8a25-670d47d33c09","870f93b5-808b-40f1-b447-ccf93a753ce5","7923b55e-6da6-4a40-84c4-51520319e220","fa5d9941-4ff3-4945-8ce0-aa559b35efcc","ce6429a2-059c-4e17-b1bb-830037312887","b5b14bda-5441-481e-b9d3-1648522e0227","1e91716b-739a-44ac-b5cc-909e38567c57","8f7c31a4-b656-47c9-a503-a72d0b3dd077","6fa0b59f-371f-4810-ad99-92f034161464","6505f1e6-349d-41e7-b2ed-27bc16968781","80969279-9547-43b9-a752-b7ce7e54dfcc","a1734e71-b7f2-49a2-b5bf-82589190c91e","a0f69375-b059-46f7-9f24-137f793299b9","d3695c52-90fe-42ab-a7f5-99af3ff81976","78764e1b-4865-44b0-ac48-cc192b6d47df","0cebe889-3591-4888-ba5d-cd61856f7e0f","3ae0dc41-2754-4e4f-a1ce-c9f00f629988","7984bda2-9ef5-4796-aa5f-767d91b9cfdf","b3c24399-ff55-4837-bd89-1c0b44f16635","21608357-2ea5-4bdf-9276-854aa02fab38","c624a36b-8887-4737-a74b-5ca488335448","641c606f-b601-4bd5-aeab-009924662632","4ee55f87-3f44-43f0-8a2a-3fad69f57b6c","68b6835c-d422-45e4-b0b6-2b4d5304ef66","e6b81e90-f467-4994-aff0-6d89920cd9fc","ed3a1e3f-e673-44bc-8f4e-51c21cd5656e","e7031dc3-4c2b-40aa-b8cd-3982d618902a"]
+= MetaData.Schema.B6 "4931368f-1cf0-4779-af41-99680f16b9a4"
+= MetaData.Schema.B7 true
+= MetaData.Schema.B8 "7.15.1.1295"
+= MetaData.Schema.HD1 "01eb38ee-668a-42f0-999d-c2534f979089"
++ MetaData.Schema.HD8 {
+  "UId": "ce033837-a876-4b81-a8a4-5a1c1cdbf883",
+  "A2": "GridSettingsProIcon",
+  "A3": "7a5ca64c-9233-45d5-ad9d-7df75d904943",
+  "A4": "7a5ca64c-9233-45d5-ad9d-7df75d904943"
+}
++ MetaData.Schema.HD8 {
+  "UId": "e050cead-8a73-447a-80a9-bd296e3149b8",
+  "A2": "SwitchGridSettingsProIcon",
+  "A3": "7a5ca64c-9233-45d5-ad9d-7df75d904943",
+  "A4": "7a5ca64c-9233-45d5-ad9d-7df75d904943"
+}
+~ MetaData.Schema.HD8 ["1f275373-2b4b-4abd-9613-83e96d068ec7","c7874ddd-82ce-46d3-aeb6-f579564a3016","055d4e23-2234-4103-9c2d-d503fe0ea409","7f7253cb-e659-4e7c-b6e5-477e75014cac","afa31317-6a53-4dbd-936e-01138735af54","e47938b3-aba6-4451-8d3c-1221d54d8960","3bf0d4bf-2d62-44dd-8e96-0a038dc4e41c","6a3b3b85-5fca-4ce9-8a0f-3094bc31bf45","233236c2-b54d-4810-bd9d-2a17d2ad3413","afbbb837-5144-4db2-bf9a-99930e17858a","ce033837-a876-4b81-a8a4-5a1c1cdbf883","e050cead-8a73-447a-80a9-bd296e3149b8"]
+- MetaData.Schema.HD12
++ MetaData.Schema.B7 true
