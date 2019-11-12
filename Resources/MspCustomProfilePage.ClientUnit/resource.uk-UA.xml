@@ -2,7 +2,9 @@
 <Resources Culture="uk-UA">
 	<Group Type="String">
 		<Items>
-			<Item Name="Caption" Value="Карточка схемы: &quot;Сохраненный профиль пользователя&quot;" />
+			<Item Name="LocalizableStrings.NotesAndFilesTabCaption.Value" Value="Файли та примітки" />
+			<Item Name="LocalizableStrings.NotesGroupCaption.Value" Value="Примітки" />
+			<Item Name="LocalizableStrings.TabVisaCaption.Value" Value="Візи" />
 		</Items>
 	</Group>
 </Resources>

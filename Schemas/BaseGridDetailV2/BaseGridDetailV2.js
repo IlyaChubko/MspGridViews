@@ -91,18 +91,6 @@ define("BaseGridDetailV2", [], function () {
 				Terrasoft.each(this.$ProfileCollection, function(profile) {
 					savedProfile.addItem(this.getButtonMenuItem(this.switchProfileButtonConfig(profile)));
 				}, this);
-
-
-
-				// var gridColumns = this.mixins.GridUtilities.getProfileColumns.call(this);
-				// this.Terrasoft.each(gridColumns, function(column, columnName) {
-				// 	savedProfile.addItem(this.getButtonMenuItem({
-				// 		Caption: {bindTo: this.name + columnName + "_SortedColumnCaption"},
-				// 		Tag: columnName,
-				// 		Click: {bindTo: "sortGrid"}
-				// 	}));
-				// }, this);
-				// this.updatesavedProfileCaptions(this.get("Profile"));
 			},
 
 			getCustomProfileMenuItem: function() {
@@ -136,13 +124,48 @@ define("BaseGridDetailV2", [], function () {
 				toolsButtonMenu.addItem(this.getCustomProfileMenuItem());
 			},
 
+			getNewProfileData: function(profileKey, callback, scope) {
+				this.Terrasoft.require(["profile!" + "MspCustomProfile_" + profileKey], callback, scope);
+			},
+
+			_clearProfileCache: function(profileKey) {
+				var cache = Terrasoft.ClientPageSessionCache;
+				if (cache) {
+					var cacheKeys = Terrasoft.keys(cache.storage);
+					Terrasoft.each(cacheKeys, function(key) {
+						if (key.indexOf(profileKey) !== -1) {
+							cache.removeItem(key);
+						}
+					});
+				}
+			},
+
 			switchProfileData: function(tag) {
-				debugger;
+				this.getNewProfileData(tag, function(profile) {
+					if (profile) {
+						profile.key = this.$Profile.key;
+						profile.DataGrid.key = this.$Profile.key;
+						this._clearProfileCache(this.$Profile.key);
+						Terrasoft.utils.saveUserProfile(this.$Profile.key, profile, false);
+						this.set("Profile", profile);
+						var gridData = this.getGridData();
+						gridData.clear();
+						if (profile) {
+							this.setColumnsProfile(profile, true);
+						}
+						this.set("GridSettingsChanged", true);
+						//this.initSortActionItems();
+						this.reloadGridData();
+					}
+				}, this);
 			},
 
 			getCustomGridSettingsValues: function() {
 				var profile = this.$Profile;
-				var defaultValues = [];
+				var defaultValues = [{
+					name: ["MspSchemaName"],
+					value: [this.entitySchemaName]
+				}];
 				if (profile) {
 					defaultValues.push({
 						name: ["MspName"],
@@ -165,7 +188,7 @@ define("BaseGridDetailV2", [], function () {
 					config.id = this.$MspProfileDataId;
 				}
 				else {
-					config.defaultValues = this.getCustomGridSettingsValues();;
+					config.defaultValues = this.getCustomGridSettingsValues();
 				}
 				this.openCardInChain(config);
 			}

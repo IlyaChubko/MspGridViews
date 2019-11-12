@@ -2,7 +2,9 @@
 <Resources Culture="fr-FR">
 	<Group Type="String">
 		<Items>
-			<Item Name="Caption" Value="Карточка схемы: &quot;Сохраненный профиль пользователя&quot;" />
+			<Item Name="LocalizableStrings.NotesAndFilesTabCaption.Value" Value="Pièces jointes et notes" />
+			<Item Name="LocalizableStrings.NotesGroupCaption.Value" Value="Notes" />
+			<Item Name="LocalizableStrings.TabVisaCaption.Value" Value="Approbations" />
 		</Items>
 	</Group>
 </Resources>

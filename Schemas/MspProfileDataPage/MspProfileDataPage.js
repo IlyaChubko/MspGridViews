@@ -37,6 +37,24 @@ define("MspProfileDataPage", [], function() {
 			},
 			{
 				"operation": "insert",
+				"name": "STRING7df08faa-5b33-48b7-a2f6-6df9c53c7348",
+				"values": {
+					"layout": {
+						"colSpan": 12,
+						"rowSpan": 1,
+						"column": 12,
+						"row": 0,
+						"layoutName": "Header"
+					},
+					"bindTo": "MspSchemaName",
+					"enabled": false
+				},
+				"parentName": "Header",
+				"propertyName": "items",
+				"index": 1
+			},
+			{
+				"operation": "insert",
 				"name": "NotesAndFilesTab",
 				"values": {
 					"caption": {

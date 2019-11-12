@@ -1,13 +1,147 @@
-define("MspCustomProfilePage", [], function() {
+define("MspCustomProfilePage", ["ConfigurationEnums", "GridUtilitiesV2"], function(ConfigurationEnums) {
 	return {
 		entitySchemaName: "MspCustomProfile",
-		attributes: {},
+		attributes: {
+			"MspProfileData": {
+				dataValueType: this.Terrasoft.DataValueType.LOOKUP,
+				lookupListConfig: {
+					columns: ["MspName", "MspSchemaName"]
+				}
+			},
+			"ProfileSchema": {
+				dataValueType: Terrasoft.DataValueType.CUSTOM_OBJECT,
+				type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN
+			}
+		},
+		mixins: {
+			GridUtilities: "Terrasoft.GridUtilities"
+		},
+		messages: {
+			"GetGridSettingsInfo": {
+				mode: this.Terrasoft.MessageMode.PTP,
+				direction: this.Terrasoft.MessageDirectionType.SUBSCRIBE
+			},
+			"GridSettingsChanged": {
+				mode: this.Terrasoft.MessageMode.PTP,
+				direction: this.Terrasoft.MessageDirectionType.SUBSCRIBE
+			}
+		},
 		modules: /**SCHEMA_MODULES*/{}/**SCHEMA_MODULES*/,
 		details: /**SCHEMA_DETAILS*/{}/**SCHEMA_DETAILS*/,
 		businessRules: /**SCHEMA_BUSINESS_RULES*/{}/**SCHEMA_BUSINESS_RULES*/,
-		methods: {},
+		methods: {
+
+			getMspProfileData: function() {
+				var profileData = this.$MspProfileData;
+				if (profileData && profileData.value) {
+					var esq = this.Ext.create("Terrasoft.EntitySchemaQuery", {
+						rootSchemaName: "MspProfileData"
+					});
+					esq.addColumn("MspSchemaName");
+					esq.getEntity(profileData.value, function (result) {
+						if (result.success) {
+							var profileSchemaName = result.entity.$MspSchemaName;
+							this.getEntitySchemaByName(profileSchemaName, function(entitySchema) {
+								this.$ProfileSchema = entitySchema;
+							}, this);
+						}
+					}, this);
+				}
+			},
+
+			onEntityInitialized: function() {
+				this.callParent(arguments);
+				this.getMspProfileData();
+			},
+
+			getProfileKey: function() {
+				return this.name + this.$Id;
+			},
+
+			getGridSettingsInfo: function() {
+				const entitySchema = this.$ProfileSchema;
+				var moduleName = this.sandbox.moduleName;
+				var workAreaMode = this.getHistoryStateInfo().workAreaMode;
+				var isEditable = this.getIsEditable();
+				//var entitySchema = this.getGridEntitySchema();
+				var isSingleTypeMode =
+					((moduleName !== "DetailModuleV2" && workAreaMode === ConfigurationEnums.WorkAreaMode.COMBINED) ||
+						isEditable);
+				return {
+					baseGridType: isEditable ? this.Terrasoft.GridType.LISTED : this.Terrasoft.GridType.TILED,
+					isSingleTypeMode: isSingleTypeMode,
+					entitySchemaName: entitySchema.name,
+					entitySchema: entitySchema,
+					profileKey: this.getProfileKey(),
+					propertyName: this.getDataGridName(),
+					notFoundColumns: this.notFoundColumns,
+					entityColumns: entitySchema.columns
+				};
+			},
+
+			getGridSettingsModuleConfig: function(gridSettingsId) {
+				return {
+					renderTo: "centerPanel",
+					id: gridSettingsId,
+					keepAlive: true,
+					instanceConfig: {
+						schemaName: "MspGridSettingsPage",
+						isSchemaConfigInitialized: true
+					}
+				};
+			},
+
+			openGridSettings: function() {
+				var gridSettingsId = this.sandbox.id + "_CardModuleV2_GridSettingsPage";
+				this.sandbox.subscribe("GetGridSettingsInfo", this.getGridSettingsInfo, this, [gridSettingsId]);
+				var params = this.sandbox.publish("GetHistoryState");
+				this.sandbox.publish("PushHistoryState", {
+					hash: params.hash.historyState,
+					silent: true
+				});
+				this.sandbox.loadModule("CardModuleV2", this.getGridSettingsModuleConfig(gridSettingsId));
+				this.sandbox.subscribe("GridSettingsChanged", function(args) {
+					var gridData = this.getGridData();
+					gridData.clear();
+					if (args && args.newProfileData) {
+						this.setColumnsProfile(args.newProfileData, true);
+					}
+					this.set("GridSettingsChanged", true);
+					this.initSortActionItems();
+				}, this, [gridSettingsId]);
+			},
+
+			onChangeProfileButtonClick: function() {
+				var config = {
+					isSilent: true,
+					callback: this.openGridSettings.bind(this),
+					callBaseSilentSavedActions: true,
+					scope: this
+				};
+				this.save(config);
+			}
+
+		},
 		dataModels: /**SCHEMA_DATA_MODELS*/{}/**SCHEMA_DATA_MODELS*/,
 		diff: /**SCHEMA_DIFF*/[
+			{
+				"operation": "insert",
+				"name": "ChangeProfileButton",
+				"values": {
+					"itemType": 5,
+					"style": "green",
+					"caption": "Изменить колонки",
+					"classes": {
+						"textClass": "actions-button-margin-right"
+					},
+					"click": {
+						"bindTo": "onChangeProfileButtonClick"
+					}
+				},
+				"parentName": "LeftContainer",
+				"propertyName": "items",
+				"index": 6
+			},
 			{
 				"operation": "insert",
 				"name": "MspNamed90e6a78-3163-4c22-aae5-0016e5463379",
@@ -25,40 +159,6 @@ define("MspCustomProfilePage", [], function() {
 				"parentName": "Header",
 				"propertyName": "items",
 				"index": 0
-			},
-			{
-				"operation": "insert",
-				"name": "MspContactd5dec058-0ad9-42c5-8706-3461cd82ccca",
-				"values": {
-					"layout": {
-						"colSpan": 12,
-						"rowSpan": 1,
-						"column": 12,
-						"row": 0,
-						"layoutName": "Header"
-					},
-					"bindTo": "MspContact"
-				},
-				"parentName": "Header",
-				"propertyName": "items",
-				"index": 1
-			},
-			{
-				"operation": "insert",
-				"name": "MspCulturee508d37d-f35d-4ee2-b1d0-e230b9a9f50b",
-				"values": {
-					"layout": {
-						"colSpan": 12,
-						"rowSpan": 1,
-						"column": 12,
-						"row": 1,
-						"layoutName": "Header"
-					},
-					"bindTo": "MspCulture"
-				},
-				"parentName": "Header",
-				"propertyName": "items",
-				"index": 2
 			},
 			{
 				"operation": "insert",

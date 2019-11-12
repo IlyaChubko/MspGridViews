@@ -1,0 +1,13 @@
+﻿{
+  "Descriptor": {
+    "UId": "95b6009e-e32f-4da4-a769-f39182a99f2f",
+    "Name": "MspActiveProfile",
+    "ModifiedOnUtc": "\/Date(1573467324000)\/",
+    "Parent": {
+      "UId": "1bab9dcf-17d5-49f8-9536-8e0064f1dce0",
+      "Name": "BaseEntity"
+    },
+    "ManagerName": "EntitySchemaManager",
+    "Caption": "Активные профили пользователя"
+  }
+}

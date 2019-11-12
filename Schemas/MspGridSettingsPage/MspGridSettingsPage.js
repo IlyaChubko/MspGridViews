@@ -1,4 +1,4 @@
-define("GridSettingsPage", [], function () {
+define("MspGridSettingsPage", [], function () {
 	return {
 		mixins: {},
 		details: /**SCHEMA_DETAILS*/{}/**SCHEMA_DETAILS*/,

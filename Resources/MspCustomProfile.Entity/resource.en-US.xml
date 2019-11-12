@@ -3,10 +3,7 @@
 	<Group Type="String">
 		<Items>
 			<Item Name="Caption" Value="Saved user profile" />
-			<Item Name="Columns.MspContact.Caption" Value="Контакт" />
-			<Item Name="Columns.MspCulture.Caption" Value="Culture" />
 			<Item Name="Columns.MspDynamic.Caption" Value="Динамическая настройка" />
-			<Item Name="Columns.MspKey.Caption" Value="Key" />
 			<Item Name="Columns.MspName.Caption" Value="Name" />
 			<Item Name="Columns.MspObjectData.Caption" Value="Data" />
 			<Item Name="Columns.MspProfileData.Caption" Value="Advanced Profile Data" />
