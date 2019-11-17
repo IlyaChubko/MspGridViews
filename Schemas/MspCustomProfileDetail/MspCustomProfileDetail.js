@@ -1,4 +1,4 @@
-define("MspCustomProfileDetail", [], function() {
+define("MspCustomProfileDetail", ["ConfigurationEnums"], function(ConfigurationEnums) {
 	return {
 		entitySchemaName: "MspCustomProfile",
 		attributes: {
@@ -20,20 +20,13 @@ define("MspCustomProfileDetail", [], function() {
 		diff: /**SCHEMA_DIFF*/[]/**SCHEMA_DIFF*/,
 		methods: {
 
-			getGridDataColumns: function() {
-				return {
-					"Id": {path: "Id"},
-					"MspProfileData": {path: "MspProfileData"},
-					"MspProfileData.MspName": {path: "MspProfileData.MspName"},
-					"MspProfileData.MspSchemaName": {path: "MspProfileData.MspSchemaName"}
-				};
-			},
+			getSwitchGridModeMenuItem: this.Terrasoft.emptyFn,
 
 			getCustomProfileKey: function() {
 				return "MspCustomProfile_" + this.$ActiveRow;
 			},
 
-			addRecord: function(editPageUId) {
+			openCustomGrid: function() {
 				const columnValues = this.sandbox.publish("GetColumnsValues", ["MspSchemaName"], [this.sandbox.id]);
 				if (columnValues && columnValues.MspSchemaName) {
 					this.getEntitySchemaByName(columnValues.MspSchemaName, function(entitySchema) {
@@ -43,14 +36,16 @@ define("MspCustomProfileDetail", [], function() {
 				}
 			},
 
+			addRecord: function(editPageUId) {
+				this.openCustomGrid();
+			},
+
 			editRecord: function(record) {
-				const columnValues = this.sandbox.publish("GetColumnsValues", ["MspSchemaName"], [this.sandbox.id]);
-				if (columnValues && columnValues.MspSchemaName) {
-					this.getEntitySchemaByName(columnValues.MspSchemaName, function(entitySchema) {
-						this.$ProfileSchema = entitySchema;
-						this.openCustomGridSettings();
-					}, this);
-				}
+				this.openCustomGrid();
+			},
+
+			copyRecord: function() {
+				debugger;
 			},
 
 			getCustomGridSettingsInfo: function() {

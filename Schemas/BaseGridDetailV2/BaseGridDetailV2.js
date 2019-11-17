@@ -9,7 +9,7 @@ define("BaseGridDetailV2", [], function () {
 			    type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN
 			},
 
-			"SavedGridProfile": {
+			"SavedCustomGridProfile": {
 			    dataValueType: Terrasoft.DataValueType.COLLECTION,
 			    type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN
 			},
@@ -27,17 +27,11 @@ define("BaseGridDetailV2", [], function () {
 
 			init: function(callback, scope) {
 				window.cts = this;
-				//this.$ProfileCollection = [];
 				const parentMethod = this.getParentMethod();
 				var parentArguments = arguments;
 				this.getCustomProfileRecord(function(){
 					parentMethod.call(this, callback, scope);
 				}, this);
-			},
-
-			initSortActionItems: function() {
-				this.callParent(arguments);
-				this.initSavedProfileItems();
 			},
 
 			getCustomProfileRecord: function(callback, scope) {
@@ -70,9 +64,9 @@ define("BaseGridDetailV2", [], function () {
 			},
 
 			_initSavedProfile: function() {
-				var savedProfile = this.get("SavedGridProfile");
+				var savedProfile = this.get("SavedCustomGridProfile");
 				if (!savedProfile) {
-					this.set("SavedGridProfile", Ext.create("Terrasoft.BaseViewModelCollection"));
+					this.set("SavedCustomGridProfile", Ext.create("Terrasoft.BaseViewModelCollection"));
 				}
 			},
 
@@ -86,7 +80,7 @@ define("BaseGridDetailV2", [], function () {
 
 			initSavedProfileItems: function() {
 				this._initSavedProfile();
-				var savedProfile = this.get("SavedGridProfile");
+				var savedProfile = this.get("SavedCustomGridProfile");
 				savedProfile.clear();
 				Terrasoft.each(this.$ProfileCollection, function(profile) {
 					savedProfile.addItem(this.getButtonMenuItem(this.switchProfileButtonConfig(profile)));
@@ -104,8 +98,8 @@ define("BaseGridDetailV2", [], function () {
 			getSwitchProfileMenuItem: function() {
 				return this.getButtonMenuItem({
 					Caption: {"bindTo": "Resources.Strings.SwitchProGridMenuCaption"},
-					Items: this.get("SavedGridProfile"),
-					"ImageConfig": this.get("Resources.Images.SwitchGridSettingsProIcon"),
+					Items: this.get("SavedCustomGridProfile"),
+					ImageConfig: this.get("Resources.Images.SwitchGridSettingsProIcon"),
 					Visible: {
 					    bindTo: "ProfileCollection",
 					    bindConfig: {
@@ -119,6 +113,7 @@ define("BaseGridDetailV2", [], function () {
 
 			addGridOperationsMenuItems: function(toolsButtonMenu) {
 				this.callParent(arguments);
+				this.initSavedProfileItems();
 				toolsButtonMenu.addItem(this.getButtonMenuSeparator());
 				toolsButtonMenu.addItem(this.getSwitchProfileMenuItem());
 				toolsButtonMenu.addItem(this.getCustomProfileMenuItem());
@@ -140,19 +135,25 @@ define("BaseGridDetailV2", [], function () {
 				}
 			},
 
+			setCustomColumnsProfile: function(viewColumnsSettingsProfile) {
+				var profile = this.get("Profile");
+				var gridName = this.getDataGridName();
+				if (profile[gridName]) {
+					var profileKey = profile[gridName].key;
+					viewColumnsSettingsProfile.key = profile.key;
+					viewColumnsSettingsProfile[gridName].key = profile.key;
+					viewColumnsSettingsProfile.isCollapsed = profile.isCollapsed;
+					Terrasoft.utils.saveUserProfile(profileKey, viewColumnsSettingsProfile, false);
+				}
+				this.set("Profile", viewColumnsSettingsProfile);
+			},
+
 			switchProfileData: function(tag) {
-				this.getNewProfileData(tag, function(profile) {
-					if (profile) {
-						profile.key = this.$Profile.key;
-						profile.DataGrid.key = this.$Profile.key;
-						this._clearProfileCache(this.$Profile.key);
-						Terrasoft.utils.saveUserProfile(this.$Profile.key, profile, false);
-						this.set("Profile", profile);
+				this.getNewProfileData(tag, function(newProfile) {
+					if (newProfile) {
 						var gridData = this.getGridData();
 						gridData.clear();
-						if (profile) {
-							this.setColumnsProfile(profile, true);
-						}
+						this.setCustomColumnsProfile(newProfile);
 						this.set("GridSettingsChanged", true);
 						//this.initSortActionItems();
 						this.reloadGridData();
@@ -192,8 +193,6 @@ define("BaseGridDetailV2", [], function () {
 				}
 				this.openCardInChain(config);
 			}
-
-
 
 		},
 		rules: {}

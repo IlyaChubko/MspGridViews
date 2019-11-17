@@ -3,9 +3,7 @@
 	<Group Type="String">
 		<Items>
 			<Item Name="Caption" Value="Сохраненный профиль пользователя" />
-			<Item Name="Columns.MspDynamic.Caption" Value="Динамическая настройка" />
 			<Item Name="Columns.MspName.Caption" Value="Название" />
-			<Item Name="Columns.MspObjectData.Caption" Value="Данные" />
 			<Item Name="Columns.MspProfileData.Caption" Value="Расширенная настройка колонок" />
 			<Item Name="EventsProcessSchema.Caption" Value="Бизнес-процесс" />
 		</Items>

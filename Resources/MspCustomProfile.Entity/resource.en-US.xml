@@ -3,10 +3,8 @@
 	<Group Type="String">
 		<Items>
 			<Item Name="Caption" Value="Saved user profile" />
-			<Item Name="Columns.MspDynamic.Caption" Value="Динамическая настройка" />
 			<Item Name="Columns.MspName.Caption" Value="Name" />
-			<Item Name="Columns.MspObjectData.Caption" Value="Data" />
-			<Item Name="Columns.MspProfileData.Caption" Value="Advanced Profile Data" />
+			<Item Name="Columns.MspProfileData.Caption" Value="Advance profile settings" />
 			<Item Name="EventsProcessSchema.Caption" Value="Бизнес-процесс" />
 		</Items>
 	</Group>
