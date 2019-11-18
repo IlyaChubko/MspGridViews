@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Resources Culture="pl-PL">
-	<Group Type="String">
-		<Items>
-			<Item Name="EventsProcessSchema.Caption" Value="Proces biznesowy" />
-		</Items>
-	</Group>
-</Resources>

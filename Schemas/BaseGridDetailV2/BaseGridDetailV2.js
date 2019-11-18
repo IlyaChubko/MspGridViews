@@ -37,32 +37,25 @@ define("BaseGridDetailV2", [], function () {
 			getCustomProfileRecord: function(callback, scope) {
 				var profile = this.$Profile;
 				if (profile && profile.key) {
-					var esq = this.Ext.create("Terrasoft.EntitySchemaQuery", {
-						rootSchemaName: "MspCustomProfile"
-					});
-					esq.addColumn("MspName");
-					esq.addColumn("MspProfileData.Id");
-					esq.filters.addItem(this.Terrasoft.createColumnFilterWithParameter(
-					    this.Terrasoft.ComparisonType.EQUAL,
-					    "MspProfileData.MspName", profile.key));
-					esq.getEntityCollection(function (result) {
-						if (result.success && result.collection.getCount() > 0) {
-							var entities = result.collection.getItems();
-							this.$MspProfileDataId = entities[0].values["MspProfileData.Id"];
-							this.$ProfileCollection = [];
-							Terrasoft.each(entities, function(item) {
-								var config = {
-									caption: item.$MspName,
-									tag: item.$Id
-								};
-								this.$ProfileCollection.push(config);
-							}, this);
+					var request = {
+					    serviceName: "MspGridService",
+					    methodName: "GetCustomProfiles",
+					    data: {
+						    key: profile.key
+					    }
+					};
+					this.callService(request, function(result) {
+						if (result && result.GetCustomProfilesResult) {
+							var profileResult = result.GetCustomProfilesResult;
+							this.$MspProfileDataId = profileResult.profileId;
+							this.$ProfileCollection = profileResult.profileItems;
 						}
 						if (callback) callback.call(scope);
-					}, this);
+					}, scope);
 				}
+				else if (callback) callback.call(scope);
 			},
-
+			
 			_initSavedProfile: function() {
 				var savedProfile = this.get("SavedCustomGridProfile");
 				if (!savedProfile) {
@@ -177,15 +170,16 @@ define("BaseGridDetailV2", [], function () {
 			},
 
 			onCustomGridSettingsClick: function() {
+				var isEditMode = (this.$MspProfileDataId !== this.Terrasoft.GUID_EMPTY);
 				var config = {
 					"schemaName": "MspProfileDataPage",
-					"operation": (this.$MspProfileDataId) ?
+					"operation": (isEditMode) ?
 						this.Terrasoft.ConfigurationEnums.CardOperation.EDIT :
 						this.Terrasoft.ConfigurationEnums.CardOperation.ADD,
 					"moduleId": this.sandbox.id + "MspProfileDataPage",
 					"renderTo": "centerPanel"
 				};
-				if (this.$MspProfileDataId) {
+				if (isEditMode) {
 					config.id = this.$MspProfileDataId;
 				}
 				else {

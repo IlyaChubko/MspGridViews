@@ -3,8 +3,11 @@
 	<Group Type="String">
 		<Items>
 			<Item Name="Caption" Value="Сохраненный профиль пользователя" />
+			<Item Name="Columns.MspIsActive.Caption" Value="Активный" />
+			<Item Name="Columns.MspIsTiled.Caption" Value="Плиточный" />
 			<Item Name="Columns.MspName.Caption" Value="Название" />
 			<Item Name="Columns.MspProfileData.Caption" Value="Расширенная настройка колонок" />
+			<Item Name="Columns.MspValue.Caption" Value="Колонки" />
 			<Item Name="EventsProcessSchema.Caption" Value="Бизнес-процесс" />
 		</Items>
 	</Group>

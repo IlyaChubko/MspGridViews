@@ -8,6 +8,7 @@
 			<Item Name="LocalizableStrings.ActivateButtonCaption.Value" Value="Enable" />
 			<Item Name="LocalizableStrings.Caption.Value" Value="Профили пользователя" />
 			<Item Name="LocalizableStrings.DeactivateButtonCaption.Value" Value="Deactivate" />
+			<Item Name="LocalizableStrings.GridSettingsButtonCaption.Value" Value="Columns setup" />
 			<Item Name="LocalizableStrings.SetupProGridMenuCaption.Value" Value="Advance columns setup" />
 			<Item Name="LocalizableStrings.SwitchProGridMenuCaption.Value" Value="Switch profile data" />
 		</Items>

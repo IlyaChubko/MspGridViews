@@ -1,11 +1,20 @@
-define("MspCustomProfileDetail", ["ConfigurationEnums"], function(ConfigurationEnums) {
+define("MspCustomProfileDetail", ["ConfigurationEnums", "ConfigurationGrid", "ConfigurationGridGenerator",
+	"ConfigurationGridUtilities"], function(ConfigurationEnums) {
 	return {
 		entitySchemaName: "MspCustomProfile",
 		attributes: {
+			IsEditable: {
+				dataValueType: Terrasoft.DataValueType.BOOLEAN,
+				type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN,
+				value: true
+			},
 			"ProfileSchema": {
 				dataValueType: Terrasoft.DataValueType.CUSTOM_OBJECT,
 				type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN
 			}
+		},
+		mixins: {
+			ConfigurationGridUtilities: "Terrasoft.ConfigurationGridUtilities"
 		},
 		messages: {
 			"GetGridSettingsInfo": {
@@ -17,10 +26,67 @@ define("MspCustomProfileDetail", ["ConfigurationEnums"], function(ConfigurationE
 				direction: this.Terrasoft.MessageDirectionType.SUBSCRIBE
 			}
 		},
-		diff: /**SCHEMA_DIFF*/[]/**SCHEMA_DIFF*/,
+		diff: /**SCHEMA_DIFF*/[
+			{
+				"operation": "merge",
+				"name": "DataGrid",
+				"values": {
+					"className": "Terrasoft.ConfigurationGrid",
+					"generator": "ConfigurationGridGenerator.generatePartial",
+					"generateControlsConfig": {"bindTo": "generateActiveRowControlsConfig"},
+					"changeRow": {"bindTo": "changeRow"},
+					"unSelectRow": {"bindTo": "unSelectRow"},
+					"onGridClick": {"bindTo": "onGridClick"},
+					"activeRowActions": [
+						{
+							"className": "Terrasoft.Button",
+							"style": this.Terrasoft.controls.ButtonEnums.style.TRANSPARENT,
+							"tag": "save",
+							"markerValue": "save",
+							"imageConfig": {"bindTo": "Resources.Images.SaveIcon"}
+						},
+						{
+							"className": "Terrasoft.Button",
+							"style": this.Terrasoft.controls.ButtonEnums.style.TRANSPARENT,
+							"tag": "cancel",
+							"markerValue": "cancel",
+							"imageConfig": {"bindTo": "Resources.Images.CancelIcon"}
+						},
+						{
+							"className": "Terrasoft.Button",
+							"style": this.Terrasoft.controls.ButtonEnums.style.TRANSPARENT,
+							"tag": "remove",
+							"markerValue": "remove",
+							"imageConfig": {"bindTo": "Resources.Images.RemoveIcon"}
+						}
+					],
+					"listedZebra": true,
+					"initActiveRowKeyMap": {"bindTo": "initActiveRowKeyMap"},
+					"activeRowAction": {"bindTo": "onActiveRowAction"},
+					"multiSelect": false,
+					"type": "listed",
+					"listedConfig": {
+						"name": "DataGridListedConfig",
+						"items": []
+					}
+				}
+			},
+			{
+				"operation": "insert",
+				"name": "GridSettingsButton",
+				"parentName": "Detail",
+				"propertyName": "tools",
+				"values": {
+					"itemType": Terrasoft.ViewItemType.BUTTON,
+					"style": Terrasoft.controls.ButtonEnums.style.TRANSPARENT,
+					"caption": {"bindTo": "Resources.Strings.GridSettingsButtonCaption"},
+					"visible": {"bindTo": "isAnySelected"},
+					"click": {"bindTo": "openCustomGrid"},
+					"tag": "onApproveButtonClick"
+				}
+			}
+		]/**SCHEMA_DIFF*/,
 		methods: {
-
-			getSwitchGridModeMenuItem: this.Terrasoft.emptyFn,
 
 			getCustomProfileKey: function() {
 				return "MspCustomProfile_" + this.$ActiveRow;
@@ -31,21 +97,15 @@ define("MspCustomProfileDetail", ["ConfigurationEnums"], function(ConfigurationE
 				if (columnValues && columnValues.MspSchemaName) {
 					this.getEntitySchemaByName(columnValues.MspSchemaName, function(entitySchema) {
 						this.$ProfileSchema = entitySchema;
-						this.openCustomGridSettings();
+						var data = this.getGridData();
+						var row = data.get(this.$ActiveRow);
+						row.save({
+							callback: this.openCustomGridSettings,
+							isSilent: true,
+							scope: this
+						});
 					}, this);
 				}
-			},
-
-			addRecord: function(editPageUId) {
-				this.openCustomGrid();
-			},
-
-			editRecord: function(record) {
-				this.openCustomGrid();
-			},
-
-			copyRecord: function() {
-				debugger;
 			},
 
 			getCustomGridSettingsInfo: function() {
@@ -53,12 +113,11 @@ define("MspCustomProfileDetail", ["ConfigurationEnums"], function(ConfigurationE
 				var moduleName = this.sandbox.moduleName;
 				var workAreaMode = this.getHistoryStateInfo().workAreaMode;
 				var isEditable = this.getIsEditable();
-				//var entitySchema = this.getGridEntitySchema();
 				var isSingleTypeMode =
 					((moduleName !== "DetailModuleV2" && workAreaMode === ConfigurationEnums.WorkAreaMode.COMBINED) ||
 						isEditable);
 				return {
-					baseGridType: isEditable ? this.Terrasoft.GridType.LISTED : this.Terrasoft.GridType.TILED,
+					baseGridType: this.Terrasoft.GridType.LISTED,
 					isSingleTypeMode: isSingleTypeMode,
 					entitySchemaName: entitySchema.name,
 					entitySchema: entitySchema,
@@ -75,14 +134,29 @@ define("MspCustomProfileDetail", ["ConfigurationEnums"], function(ConfigurationE
 					id: gridSettingsId,
 					keepAlive: true,
 					instanceConfig: {
-						schemaName: "MspGridSettingsPage",
+						schemaName: "GridSettingsPage",
 						isSchemaConfigInitialized: true
 					}
 				};
 			},
 
-			openCustomGridSettings: function(schemaName) {
-				var gridSettingsId = this.sandbox.id + "_CardModuleV2_MspGridSettingsPage";
+			saveProfileSetings: function(profileId, isTiled, profileValue, callback, scope) {
+				var request = {
+				    serviceName: "MspGridService",
+				    methodName: "SaveCustomProfiles",
+				    data: {
+					    profileData: {
+						    profileSettingsId: profileId,
+						    isTiled: isTiled,
+						    profileValue: profileValue
+					    }
+				    }
+				};
+				this.callService(request, callback, scope);
+			},
+
+			openCustomGridSettings: function(record) {
+				var gridSettingsId = this.sandbox.id + "_CardModuleV2_GridSettingsPage";
 				this.sandbox.subscribe("GetGridSettingsInfo", this.getCustomGridSettingsInfo, this, [gridSettingsId]);
 				var params = this.sandbox.publish("GetHistoryState");
 				this.sandbox.publish("PushHistoryState", {
@@ -91,13 +165,15 @@ define("MspCustomProfileDetail", ["ConfigurationEnums"], function(ConfigurationE
 				});
 				this.sandbox.loadModule("CardModuleV2", this.getGridSettingsModuleConfig(gridSettingsId));
 				this.sandbox.subscribe("GridSettingsChanged", function(args) {
-					// var gridData = this.getGridData();
-					// gridData.clear();
-					// if (args && args.newProfileData) {
-					// 	this.setColumnsProfile(args.newProfileData, true);
-					// }
-					// this.set("GridSettingsChanged", true);
-					// this.initSortActionItems();
+					var rowId = this.$ActiveRow;
+					var gridName = this.getDataGridName();
+					var profile = args.newProfileData[gridName];
+					if (profile) {
+						const profileValue = (!!profile.isTiled) ? profile.tiledConfig : profile.listedConfig;
+						this.saveProfileSetings(this.$ActiveRow, profile.isTiled, profileValue, function() {
+							this.reloadGridData();
+						}, this);
+					}
 				}, this, [gridSettingsId]);
 			}
 
