@@ -1,0 +1,43 @@
+﻿{
+  "PackageData": [
+    {
+      "Row": [
+        {
+          "SchemaColumnUId": "03a27b75-6d7f-4be4-b0fd-f03ffd8a7aab",
+          "Value": "null",
+          "DisplayValue": ""
+        },
+        {
+          "SchemaColumnUId": "ae0e45ca-c495-4fe7-a39d-3ab7278e1617",
+          "Value": "2a8030d9-75c3-43e3-9e98-8e568e0c5389"
+        },
+        {
+          "SchemaColumnUId": "3bb9d182-ad73-4379-9d51-2003c862a90c",
+          "Value": "MspProfileDataPageMspCustomProfileDetail"
+        },
+        {
+          "SchemaColumnUId": "986fc9ee-72b2-4cc9-af5e-ed64af54d30f",
+          "Value": "eyJrZXkiOiJNc3BQcm9maWxlRGF0YVBhZ2VNc3BDdXN0b21Qcm9maWxlRGV0YWlsIiwiRGF0YUdyaWQiOnsibGlzdGVkQ29uZmlnIjoie1wiaXRlbXNcIjpbe1wibWV0YVBhdGhcIjpcIk1zcE5hbWVcIixcIndpZHRoXCI6NyxcImRhdGFWYWx1ZVR5cGVcIjoxLFwiYmluZFRvXCI6XCJNc3BOYW1lXCIsXCJvcmRlckRpcmVjdGlvblwiOjIsXCJvcmRlclBvc2l0aW9uXCI6MSxcIml0ZW1JZFwiOlwiOGQ1NjE1MjktMjMwMi00NzJlLWI1ZTItZWM5ZWY1MDE0YzBmXCIsXCJsZWZ0RXhwcmVzc2lvbkNhcHRpb25cIjpcItCd0LDQt9Cy0LDQvdC40LVcIixcImlzVGlsZWRcIjpmYWxzZSxcIml0ZW1Ecm9wSGludFwiOntcInZpc2libGVcIjpmYWxzZX0sXCJjYXB0aW9uXCI6XCLQndCw0LfQstCw0L3QuNC1XCIsXCJwb3NpdGlvblwiOntcImNvbHVtblwiOjAsXCJjb2xTcGFuXCI6OCxcInJvd1wiOjF9fV19IiwidGlsZWRDb25maWciOiJ7XCJncmlkXCI6e1wicm93c1wiOjAsXCJjb2x1bW5zXCI6MjR9LFwiaXRlbXNcIjpbXX0iLCJrZXkiOiJNc3BQcm9maWxlRGF0YVBhZ2VNc3BDdXN0b21Qcm9maWxlRGV0YWlsIiwiaXNUaWxlZCI6ZmFsc2UsInR5cGUiOiJsaXN0ZWQifSwiaXNDb2xsYXBzZWQiOmZhbHNlLCJwcm9maWxlQ3VsdHVyZUlkIjoiMWE3NzhlM2YtMGE4ZS1lMTExLTg0YTMtMDAxNTVkMDU0YzAzIn0="
+        },
+        {
+          "SchemaColumnUId": "99d21524-ccad-45c1-998d-e9de6a6412af",
+          "Value": "null"
+        },
+        {
+          "SchemaColumnUId": "6851587b-0b7a-45cb-a5a5-31994420d81b",
+          "Value": "null"
+        },
+        {
+          "SchemaColumnUId": "fd26b95c-06ba-4595-915e-bc5657d10842",
+          "Value": "1a778e3f-0a8e-e111-84a3-00155d054c03",
+          "DisplayValue": "ru-RU"
+        },
+        {
+          "SchemaColumnUId": "216b38f5-e2c3-462b-ae2e-1df80fc21b33",
+          "Value": "null",
+          "DisplayValue": ""
+        }
+      ]
+    }
+  ]
+}
