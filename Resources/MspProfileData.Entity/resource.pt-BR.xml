@@ -2,7 +2,7 @@
 <Resources Culture="pt-BR">
 	<Group Type="String">
 		<Items>
-			<Item Name="Caption" Value="Расширенная настройка колонок" />
+			<Item Name="Caption" Value="Advanced profile settings" />
 		</Items>
 	</Group>
 </Resources>

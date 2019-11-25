@@ -3,7 +3,7 @@
 	<Group Type="String">
 		<Items>
 			<Item Name="Caption" Value="Страница редактирования: &quot;Расширенная настройка колонок&quot;" />
-			<Item Name="LocalizableStrings.SettingsTabCaption.Value" Value="Attachments and notes" />
+			<Item Name="LocalizableStrings.SettingsTabCaption.Value" Value="Settings" />
 		</Items>
 	</Group>
 </Resources>
