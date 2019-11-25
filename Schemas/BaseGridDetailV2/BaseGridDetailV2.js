@@ -5,13 +5,13 @@ define("BaseGridDetailV2", [], function () {
 		attributes: {
 
 			"MspProfileDataId": {
-			    dataValueType: Terrasoft.DataValueType.TEXT,
-			    type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN
+				dataValueType: Terrasoft.DataValueType.TEXT,
+				type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN
 			},
 
 			"SavedCustomGridProfile": {
-			    dataValueType: Terrasoft.DataValueType.COLLECTION,
-			    type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN
+				dataValueType: Terrasoft.DataValueType.COLLECTION,
+				type: Terrasoft.ViewModelColumnType.VIRTUAL_COLUMN
 			},
 
 			"ProfileCollection": {
@@ -38,11 +38,11 @@ define("BaseGridDetailV2", [], function () {
 				var profile = this.$Profile;
 				if (profile && profile.key) {
 					var request = {
-					    serviceName: "MspGridService",
-					    methodName: "GetCustomProfiles",
-					    data: {
-						    key: profile.key
-					    }
+						serviceName: "MspGridService",
+						methodName: "GetCustomProfiles",
+						data: {
+							key: profile.key
+						}
 					};
 					this.callService(request, function(result) {
 						if (result && result.GetCustomProfilesResult) {
@@ -94,12 +94,12 @@ define("BaseGridDetailV2", [], function () {
 					Items: this.get("SavedCustomGridProfile"),
 					ImageConfig: this.get("Resources.Images.SwitchGridSettingsProIcon"),
 					Visible: {
-					    bindTo: "ProfileCollection",
-					    bindConfig: {
-					        converter: function(value) {
-					            return this.$ProfileCollection && this.$ProfileCollection.length > 0;
-					        }
-					    }
+						bindTo: "ProfileCollection",
+						bindConfig: {
+							converter: function(value) {
+								return this.$ProfileCollection && this.$ProfileCollection.length > 0;
+							}
+						}
 					}
 				});
 			},
@@ -133,6 +133,7 @@ define("BaseGridDetailV2", [], function () {
 				var gridName = this.getDataGridName();
 				if (profile[gridName]) {
 					var profileKey = profile[gridName].key;
+
 					viewColumnsSettingsProfile.key = profile.key;
 					viewColumnsSettingsProfile[gridName].key = profile.key;
 					viewColumnsSettingsProfile.isCollapsed = profile.isCollapsed;
