@@ -41,7 +41,7 @@ namespace Terrasoft.Configuration
 			esq.IgnoreDisplayValues = true;
 			var nameColumn = esq.AddColumn("MspName");
 			var profileIdColumn = esq.AddColumn("MspProfileData.Id");
-			esq.Filters.Add(esq.CreateFilterWithParameters(FilterComparisonType.Equal, "MspProfileData.MspName", key));
+			esq.Filters.Add(esq.CreateFilterWithParameters(FilterComparisonType.Equal, "MspProfileData.MspKey", key));
 			esq.Filters.Add(esq.CreateFilterWithParameters(FilterComparisonType.Equal, "MspIsActive", true));
 			esq.Filters.Add(esq.CreateIsNotNullFilter("MspValue"));
 			EntityCollection entityCollection = esq.GetEntityCollection(_userConnection);
@@ -59,8 +59,8 @@ namespace Terrasoft.Configuration
 		public void SaveCustomProfiles(MspProfileData profileData)
 		{
 			string profileValue = (profileData.IsTiled) ? ParseTiledProfile(profileData.ProfileValue) : ParseListedProfile(profileData.ProfileValue);
-			EntitySchema contactEmailSchema = _userConnection.EntitySchemaManager.GetInstanceByName("MspCustomProfile");
-			var entity = contactEmailSchema.CreateEntity(_userConnection);
+			EntitySchema profileSchema = _userConnection.EntitySchemaManager.GetInstanceByName("MspCustomProfile");
+			var entity = profileSchema.CreateEntity(_userConnection);
 			entity.FetchFromDB(profileData.ProfileSettingsId);
 			entity.SetColumnValue("MspIsTiled", profileData.IsTiled);
 			entity.SetColumnValue("MspValue", profileValue);

@@ -17,6 +17,8 @@ namespace Terrasoft.Configuration
 	[DataContract]
 	public class MspProfileData
 	{
+		[DataMember(Name = "caption")]
+		public string Caption { get; set; }		
 		[DataMember(Name = "profileId")]
 		public Guid ProfileId { get; set; }
 		[DataMember(Name = "profileSettingsId")]

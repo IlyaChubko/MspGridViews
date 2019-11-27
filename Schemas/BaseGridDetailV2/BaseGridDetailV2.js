@@ -1,4 +1,4 @@
-define("BaseGridDetailV2", [], function () {
+define("BaseGridDetailV2", ["MspLocalizableHelperResources"], function (resources) {
 	return {
 		mixins: {},
 		details: /**SCHEMA_DETAILS*/{}/**SCHEMA_DETAILS*/,
@@ -26,7 +26,6 @@ define("BaseGridDetailV2", [], function () {
 		methods: {
 
 			init: function(callback, scope) {
-				window.cts = this;
 				const parentMethod = this.getParentMethod();
 				var parentArguments = arguments;
 				this.getCustomProfileRecord(function(){
@@ -162,10 +161,16 @@ define("BaseGridDetailV2", [], function () {
 					value: [this.entitySchemaName]
 				}];
 				if (profile) {
-					defaultValues.push({
-						name: ["MspName"],
-						value: [profile.key]
-					});
+					const name = Terrasoft.getFormattedString(resources.localizableStrings.GridDetailName, this.$Caption);
+					defaultValues.push(
+						{
+							name: ["MspName"],
+							value: [name]
+						},
+						{
+							name: ["MspKey"],
+							value: [profile.key]
+						});
 				}
 				return defaultValues;
 			},
