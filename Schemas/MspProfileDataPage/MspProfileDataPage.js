@@ -19,7 +19,7 @@ define("MspProfileDataPage", [], function() {
 		diff: /**SCHEMA_DIFF*/[
 			{
 				"operation": "insert",
-				"name": "NotesAndFilesTab",
+				"name": "SettingsTab",
 				"values": {
 					"caption": {
 						"bindTo": "Resources.Strings.SettingsTabCaption"
@@ -38,9 +38,21 @@ define("MspProfileDataPage", [], function() {
 					"itemType": 2,
 					"markerValue": "added-detail"
 				},
-				"parentName": "NotesAndFilesTab",
+				"parentName": "SettingsTab",
 				"propertyName": "items",
 				"index": 0
+			},
+			{
+				"operation": "remove",
+				"name": "ESNTab"
+			},
+			{
+				"operation": "remove",
+				"name": "ESNFeedContainer"
+			},
+			{
+				"operation": "remove",
+				"name": "ESNFeed"
 			}
 		]/**SCHEMA_DIFF*/
 	};
