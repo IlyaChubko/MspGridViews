@@ -1,21 +1,21 @@
 ﻿{
-  "Descriptor": {
-    "UId": "4931368f-1cf0-4779-af41-99680f16b9a4",
-    "PackageVersion": "7.8.0",
-    "Name": "MspDynamicGrid",
-    "ModifiedOnUtc": "\/Date(1574835586000)\/",
-    "Maintainer": "IlyaChubko",
-    "DependsOn": [
-      {
-        "UId": "613fd913-be03-46ce-909b-f44e4225469e",
-        "PackageVersion": "7.8.0",
-        "Name": "UIv2"
-      },
-      {
-        "UId": "9310225d-1ff8-45f2-9f34-9faf094d635a",
-        "PackageVersion": "7.8.0",
-        "Name": "Timeline"
-      }
-    ]
-  }
+	"Descriptor": {
+		"UId": "4931368f-1cf0-4779-af41-99680f16b9a4",
+		"PackageVersion": "7.8.0",
+		"Name": "MspGridViews",
+		"ModifiedOnUtc": "\/Date(1574835586000)\/",
+		"Maintainer": "IlyaChubko",
+		"DependsOn": [
+			{
+				"UId": "613fd913-be03-46ce-909b-f44e4225469e",
+				"PackageVersion": "7.8.0",
+				"Name": "UIv2"
+			},
+			{
+				"UId": "9310225d-1ff8-45f2-9f34-9faf094d635a",
+				"PackageVersion": "7.8.0",
+				"Name": "Timeline"
+			}
+		]
+	}
 }
