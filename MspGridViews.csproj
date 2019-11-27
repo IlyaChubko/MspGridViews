@@ -54,9 +54,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Files\cs\MspCustomProfileEventListener.cs" />
     <Compile Include="Files\cs\MspGridData.cs" />
     <Compile Include="Files\cs\MspGridHelper.cs" />
     <Compile Include="Files\cs\MspGridService.cs" />
+    <Compile Include="Files\cs\MspProfileDataEventListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <!-- ##BpmonlineSDKMarker## -->
