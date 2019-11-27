@@ -142,15 +142,16 @@ define("MspCustomProfileDetail", ["ConfigurationEnums", "ConfigurationGrid", "Co
 
 			saveProfileSetings: function(profileId, isTiled, profileValue, callback, scope) {
 				var request = {
-				    serviceName: "MspGridService",
-				    methodName: "SaveCustomProfiles",
-				    data: {
-					    profileData: {
-						    profileSettingsId: profileId,
-						    isTiled: isTiled,
-						    profileValue: profileValue
-					    }
-				    }
+					serviceName: "MspGridService",
+					methodName: "SaveCustomProfiles",
+					data: {
+						profileData: {
+							caption: this.$Caption,
+							profileSettingsId: profileId,
+							isTiled: isTiled,
+							profileValue: profileValue
+						}
+					}
 				};
 				this.callService(request, callback, scope);
 			},
