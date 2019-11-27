@@ -1,12 +1,16 @@
-# Grid views for Creatio 1.0
-Grid views for Creatio предоставляет возможность сохранения настройки колонок деталей и быстро переключаться между ними.
+# Grid views for [Creatio](https://www.creatio.com/)
+Grid views for Creatio allow users save custom profiles of column setup and quick load custom settings.
 
-## Варианты использования:
-Данное решение будет полезно пользователям, кто работает с разными настройками одной и той же детали.
+## Use cases:
+This add-on for users, who work with other columns settings in the same detail.
 
-## Возможности:
-- сохранение пользовательских настроек
-- быстрое переключение между настройками
+## Installation
+You can dowload release archive from [latest release](https://github.com/IlyaChubko/MspGridViews/releases). Install with [instruction](https://academy.creatio.com/documents/administration/7-15/installed-applications-section).
 
-## Ограничение:
-- дополнение работает пока только со списочным представлением детелей
+## Key features:
+- Save custom column settings;
+- Quick switch column settings;
+- Enable/Disable custom settings;
+
+## Notes:
+- Works with listed column settings.
