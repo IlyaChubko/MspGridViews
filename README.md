@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/ny6lcio9ghny33a5/branch/master?svg=true)](https://ci.appveyor.com/project/IlyaChubko/mspgridviews/branch/master)
+
 # Grid views for [Creatio](https://www.creatio.com/)
 Grid views for Creatio allows users to create custom profiles of column setup and switch between them quickly.
 
