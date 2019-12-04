@@ -9,14 +9,17 @@ on:
 
 jobs:
   build:
-
     runs-on: self-hosted
-
+    env:
+        MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+    - name: Change encoding
+      run: chcp 65001
+      shell: pwsh
+    - name: Nuget restore
+      run: ${env:MSBUILD_PATH} /t:restore
+      shell: pwsh
+    - name: Build
+      run: ${env:MSBUILD_PATH} /p:Configuration=Release
+      shell: pwsh
