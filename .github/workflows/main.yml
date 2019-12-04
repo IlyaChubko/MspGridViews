@@ -16,10 +16,10 @@ jobs:
     - uses: actions/checkout@v1
     - name: Change encoding
       run: chcp 65001
-      shell: pwsh
+      shell: powershell
     - name: Nuget restore
       run: ${env:MSBUILD_PATH} /t:restore
-      shell: pwsh
+      shell: powershell
     - name: Build
       run: ${env:MSBUILD_PATH} /p:Configuration=Release
-      shell: pwsh
+      shell: powershell
