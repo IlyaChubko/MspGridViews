@@ -12,14 +12,14 @@ jobs:
   build:
     runs-on: self-hosted
     env:
-        MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe
+        MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe /t:restore
     steps:
     - uses: actions/checkout@v1
     - name: Change encoding
       run: chcp 65001
       shell: powershell
     - name: Nuget restore
-      run: ${env:MSBUILD_PATH} "/t:restore"
+      run: ${env:MSBUILD_PATH}
       shell: powershell
     - name: Build
       run: ${env:MSBUILD_PATH} /p:Configuration=Release
