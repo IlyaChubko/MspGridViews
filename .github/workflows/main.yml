@@ -19,7 +19,7 @@ jobs:
       run: chcp 65001
       shell: powershell
     - name: Nuget restore
-      run: "${env:MSBUILD_PATH} /t:restore"
+      run: ${env:MSBUILD_PATH} "/t:restore"
       shell: powershell
     - name: Build
       run: ${env:MSBUILD_PATH} /p:Configuration=Release
